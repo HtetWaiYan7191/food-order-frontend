@@ -22,8 +22,16 @@ export const userSignUp = createAsyncThunk('user/signup', async (newUser) => {
 export const userLogIn = createAsyncThunk('user/login', async (newUser) => {
     const response = await axios.post(`${LOGIN_URL}`, newUser);
     sessionStorage.setItem('authToken', response.headers.authorization)
-    console.log(response.data.status)
     return response.data.status;
+})
+
+export const userLogOut = createAsyncThunk('user/logout', async (authToken) => {
+    const response = await axios.delete(`${LOGOUT_URL}`, {
+        headers: {
+            Authorization: authToken
+        }
+    })
+    return response.status
 })
 
 const authSlice = createSlice({
