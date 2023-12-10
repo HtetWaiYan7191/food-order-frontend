@@ -29,7 +29,6 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('handle submit is working')
      dispatch(userSignUp(newUser)).then((res) => {
       if(res.payload.status.code === 404) {
          setErrorMessage(res.payload.error.message)
